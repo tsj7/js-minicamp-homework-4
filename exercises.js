@@ -1,8 +1,42 @@
 'use strict';
 
+/*
+
+	Feynman's
+
+	* Callback Functions - allow functions to be passed into another function as an
+	argument.
+
+	* Closure - allows a function to call another function inside of itself and 
+	return it.
+
+	* arguments array - a type of array that passes information to a function
+
+	* recursion - allows a function to continue to operate over itself until it ends
+
+	* prototype - sets the properties and methods that will later be used by the object.
+
+	* constructors -  the beginning of an object that allows us to make other similar
+	objects.
+
+	*/
+
 //Do not change any of the function names
 
 function multiplyArguments() {
+
+
+if (arguments.length === 0) {
+	return 0;
+}		
+else if (arguments.length === 1) {
+	return arguments[0];
+}
+var product = arguments[0];
+for (var i = 1; i < arguments.length; i++) {
+	product *= arguments[i];
+	}
+	return product;
 	//use the arguments keyword to multiply all of the arguments together and return the product
 	//if no arguments are passed in return 0
 	//if one argument is passed in just return it
@@ -10,47 +44,102 @@ function multiplyArguments() {
 
 function invokeCallback(cb) {
 	//invoke cb
+
+	return cb ();
 }
 
 function sumArray(numbers, cb) {
+
+var sum = 0;
+numbers.forEach(function(num) {
+	sum += num;
+});
+cb(sum);
+}
+
 	//sum up all of the integers in the numbers array
 	//pass the result to cb
 	//no return is necessary
-}
+
 
 function forEach(arr, cb) {
-	//iterate over arr and pass its values to cb one by one
-	//hint: you will be invoking cb multiple times (once for each value in the array)
+
+for (var i = 0; i < arr.length; i++) {
+	cb(arr[i]);
+	}
 }
 
+	//iterate over arr and pass its values to cb one by one
+	//hint: you will be invoking cb multiple times (once for each value in the array)
+
+
 function map(arr, cb) {
+
+var newArray;
+newArray = arr.map(function(item) {
+	return cb(item);
+
+});
+
+	return newArray;
+
 	//create a new array
 	//iterate over each value in arr, pass it to cb, then place the value returned from cb into the new arr
 	//the new array should be the same length as the array argument
 }
 
 function getUserConstructor() {
+
+function User(options) {
+this.username = options.username;
+this.name = options.name;
+this.email = options.email;
+this.password = options.password;
+}
+
+User.prototype.sayHi = function() {
+	return 'Hello, my name is ' + this.name;
+};
+return User;
+}
+
 	//create a constructor called User
 	//it should accept an options object with username, name, email, and password properties
 	//in the constructor set the username, name, email, and password properties
 	//the constructor should have a method 'sayHi' on its prototype that returns the string 'Hello, my name is {{name}}'
 	//{{name}} should be the name set on each instance
 	//return the constructor
-}
+
 
 function addPrototypeMethod(Constructor) {
+
+Constructor.prototype.sayHi = function() {
+	return 'Hello World!';
+};
+
 	//add a method to the constructor's prototype
 	//the method should be called 'sayHi' and should return the string 'Hello World!'
 }
 
 function addReverseString() {
+
+String.prototype.reverse = function () {
+	return this.split('').reverse().join('');
+};
+}
+
 	//add a method to the string constructor's prototype that returns a reversed copy of the string
 	//name this method reverse
 	//hint:
 	//you will need to use 'this' inside of reverse
-}
+
 
 function nFactorial(n) {
+
+if (n === 1) {
+	return 1;
+}
+	return n * nFactorial(n-1);
 	//return the factorial for n
 	//solve this recursively
 	//example:
